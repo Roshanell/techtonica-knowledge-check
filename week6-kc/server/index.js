@@ -7,6 +7,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 // provides utilities for working with file and direcotry paths
 const path = require("path");
+const { response } = require("express");
 
 // storing the express method in the var app
 const app = express();
@@ -26,19 +27,28 @@ app.use(express.static("../client"));
 // get request for the home page
 app.get("/", (req, res) => {
 	// responds with a index file in the client dir
-	res.sendFile(path.join(__dirname, "./client/index.html"));
+	res.sendFile(path.join(__dirname, "../client/index.html"));
 });
 
 //get req for about me page
 app.get("/aboutme", (req, res) => {
 	// responds with a about file in the client dir
-	res.sendFile(path.join(__dirname, "./client/about.html"));
+	res.sendFile(path.join(__dirname, "../client/about.html"));
 });
+
+//get req for contact me page
 
 app.get("/contactme", (req, res) => {
-	res.sendFile(path.join(__dirname, "./client/contactMe.html"));
+	// responds with contact me file
+	res.sendFile(path.join(__dirname, "../client/contactMe.html"));
 });
 
+
+// get req for error page
+app.get("/error", (req, res) => {
+	// responds with 404 file
+	res.sendFile(path.join(__dirname, "../client/404.html"));
+});
 // tells expresss to isten to the port specified
 app.listen(PORT, () =>
 	console.log(`Server is running on ${PORT}. You better go catch it!`)
